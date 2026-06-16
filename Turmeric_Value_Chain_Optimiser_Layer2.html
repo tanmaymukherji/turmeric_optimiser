@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Turmeric Value Chain Optimiser – Kalahandi</title>
+  <style>
+    :root{
+      --bg:#f7f4e8; --panel:#fffdf7; --ink:#243126; --muted:#667160; --green:#2f6b3f; --green2:#74a55b;
+      --turmeric:#d6921e; --yellow:#f4c45d; --brown:#8b5d2b; --red:#a94438; --blue:#2d6073;
+      --line:#ded7be; --soft:#f2ead2; --shadow:0 12px 28px rgba(55,44,18,.12); --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#f7f4e8,#efe7cd);color:var(--ink)}
+    header{padding:22px 28px;background:linear-gradient(135deg,#244d31,#5a813d);color:white;position:sticky;top:0;z-index:10;box-shadow:0 4px 18px rgba(0,0,0,.18)}
+    header h1{margin:0;font-size:24px;letter-spacing:.2px} header p{margin:7px 0 0;color:#e6f2df;font-size:13px}
+    .wrap{max-width:1480px;margin:0 auto;padding:20px;display:grid;grid-template-columns:330px 1fr;gap:18px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .side{padding:16px;height:calc(100vh - 110px);position:sticky;top:92px;overflow:auto}.main{padding:16px;min-height:800px}
+    h2{font-size:18px;margin:2px 0 12px} h3{font-size:14px;margin:18px 0 8px;color:var(--green)}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tab,.btn{border:1px solid var(--line);background:#fffaf0;border-radius:999px;padding:9px 13px;cursor:pointer;font-weight:700;color:var(--ink)}
+    .tab.active,.btn.primary{background:var(--green);color:white;border-color:var(--green)}.btn.small{padding:6px 9px;font-size:12px}.btn.warn{background:#fff0d1;color:#654100}.btn.red{background:#ffe7e2;color:#8a291f}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+    label{font-size:12px;font-weight:700;color:var(--muted);display:block;margin:9px 0 3px} input,select,textarea{width:100%;border:1px solid var(--line);background:white;border-radius:10px;padding:8px 9px;font-size:13px} input[type=range]{padding:0} textarea{min-height:70px}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}.kpi{background:linear-gradient(180deg,#fffdf8,#f4ecd8);border:1px solid var(--line);border-radius:16px;padding:14px}.kpi .label{font-size:12px;color:var(--muted);font-weight:700}.kpi .value{font-size:24px;font-weight:900;margin-top:6px;color:var(--green)}.kpi .sub{font-size:12px;margin-top:4px;color:#786f59}
+    .pathway{border:1px solid var(--line);background:#fffaf0;border-radius:18px;padding:14px;margin-bottom:16px}.pathway-head{display:flex;justify-content:space-between;gap:10px;align-items:center}.pathway h3{margin:0;font-size:16px;color:#2c402d}.badge{display:inline-flex;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800;background:#e5f2df;color:#28572f;border:1px solid #cce1c3}.badge.orange{background:#fff2d5;color:#7a4d00;border-color:#efd28d}.badge.blue{background:#e2f1f5;color:#235569;border-color:#b8dce7}
+    .flow{display:flex;align-items:stretch;gap:7px;overflow:auto;padding:12px 0}.node{min-width:158px;background:white;border:2px solid var(--line);border-radius:16px;padding:11px;box-shadow:0 5px 14px rgba(55,44,18,.08);position:relative}.node.farmer{border-color:#5b9b48;background:#f2faed}.node.shg{border-color:#d6921e;background:#fff7df}.node.sj{border-color:#2d6073;background:#edf8fb}.node h4{margin:0 0 7px;font-size:13px}.node .role{font-size:11px;color:var(--muted);font-weight:700}.node .price{font-size:20px;font-weight:900;margin:7px 0 2px;color:#2c3b2d}.node .mini{font-size:11px;color:#766c55;line-height:1.35}.arrow{align-self:center;color:#9f8a56;font-size:28px;font-weight:900;min-width:22px;text-align:center}.node select,.node input{margin-top:6px;padding:6px}
+    table{width:100%;border-collapse:separate;border-spacing:0;margin-top:10px;background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden} th,td{border-bottom:1px solid #eee6cc;padding:8px 9px;text-align:left;font-size:12px} th{background:#efe5c8;color:#38513a;font-weight:900} tr:last-child td{border-bottom:0} td.num{text-align:right;font-variant-numeric:tabular-nums}.positive{color:#246b34;font-weight:800}.negative{color:#a2382e;font-weight:800}.highlight{background:#fff6d9}.muted{color:var(--muted)}
+    .hidden{display:none!important}.notice{border-left:4px solid var(--turmeric);background:#fff6dc;padding:12px;border-radius:12px;margin:10px 0;color:#5c4313}.result-card{background:#f5faef;border:1px solid #cfe5c3;border-radius:16px;padding:14px;margin:12px 0}.result-card h3{margin-top:0}.scorebar{height:12px;background:#e8e1c8;border-radius:99px;overflow:hidden}.scorebar span{display:block;height:100%;background:linear-gradient(90deg,#74a55b,#d6921e);border-radius:99px}.legend{display:flex;gap:8px;flex-wrap:wrap;font-size:11px}.dot{width:12px;height:12px;border-radius:4px;display:inline-block;margin-right:4px;vertical-align:-2px}.dot.f{background:#cdecc1}.dot.s{background:#ffe2a0}.dot.j{background:#caeaf2}.dot.o{background:#eee}.footer{font-size:11px;color:#776c52;margin-top:16px}.pillrow{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0}.scenario{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:9px;margin-bottom:8px;background:#fffdfa}.scenario strong{font-size:13px}.scenario span{font-size:11px;color:var(--muted)}
+    @media(max-width:980px){.wrap{grid-template-columns:1fr}.side{position:relative;top:0;height:auto}.kpis,.grid4{grid-template-columns:1fr 1fr}.grid3{grid-template-columns:1fr}.flow{flex-direction:column}.arrow{transform:rotate(90deg)}}
+  </style>
+</head>
+<body>
+<header>
+  <h1>Turmeric Value Chain Optimiser – Kalahandi</h1>
+  <p>Layer 2 visual app: map pathways, edit node prices, compare farmer/SHG gains, and optimise routes with minimum investment.</p>
+</header>
+<div class="wrap">
+  <aside class="panel side">
+    <h2>Scenario Controls</h2>
+    <label>Optimisation Goal</label>
+    <select id="goal">
+      <option value="balanced">Balanced Farmer + SHG Benefit</option>
+      <option value="farmer">Maximise Farmer Income</option>
+      <option value="shg">Maximise Women SHG Income</option>
+      <option value="lowinv">Lowest Investment Path</option>
+      <option value="market">Highest Market Penetration</option>
+      <option value="premium">Premium / Wellness Strategy</option>
+    </select>
+    <div class="pillrow">
+      <button class="btn primary" onclick="optimise()">Optimise Path</button>
+      <button class="btn" onclick="recalc()">Recalculate</button>
+      <button class="btn warn" onclick="resetModel()">Reset</button>
+    </div>
+    <h3>Editable Core Assumptions</h3>
+    <div class="grid2">
+      <div><label>Dried turmeric from farmer ₹/kg</label><input id="farmerDry" type="number" value="120" oninput="syncAssumptions()"></div>
+      <div><label>SHG/trader resale ₹/kg</label><input id="traderDry" type="number" value="135" oninput="syncAssumptions()"></div>
+      <div><label>Loose powder cost ₹/kg</label><input id="powderCost" type="number" value="180" oninput="syncAssumptions()"></div>
+      <div><label>Processing cost ₹/kg</label><input id="processingCost" type="number" value="20" oninput="syncAssumptions()"></div>
+      <div><label>Monthly market kg/store</label><input id="kgStore" type="number" value="10" oninput="recalc()"></div>
+      <div><label>Stores / women network points</label><input id="stores" type="number" value="25" oninput="recalc()"></div>
+      <div><label>Direct sales share %</label><input id="directShare" type="number" value="35" min="0" max="100" oninput="recalc()"></div>
+      <div><label>Working capital days</label><input id="wcDays" type="number" value="30" oninput="recalc()"></div>
+    </div>
+    <h3>Scenario Presets</h3>
+    <div class="scenario"><div><strong>Market Penetration</strong><br><span>Compete using 100g/200g packs and retailer margins.</span></div><button class="btn small" onclick="applyPreset('market')">Apply</button></div>
+    <div class="scenario"><div><strong>SHG Direct Network</strong><br><span>Women SHGs capture sourcing, processing, packing and retail.</span></div><button class="btn small" onclick="applyPreset('direct')">Apply</button></div>
+    <div class="scenario"><div><strong>Wellness Premium</strong><br><span>Higher value packs, quality story, smaller volumes.</span></div><button class="btn small" onclick="applyPreset('premium')">Apply</button></div>
+    <h3>Save / Load</h3>
+    <div class="pillrow"><button class="btn small" onclick="downloadJSON()">Download Model JSON</button><button class="btn small" onclick="exportCSV()">Export Node CSV</button></div>
+    <input type="file" id="jsonFile" accept="application/json" onchange="loadJSON(event)">
+    <div class="footer">Default values are seeded from the attached RT Data workbook: Rampur/Urladani observations, Seba Jagat SKUs, Bharat/Everest small SKUs, and mapped pathway nodes.</div>
+  </aside>
+  <main class="panel main">
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('dashboard',this)">Dashboard</button>
+      <button class="tab" onclick="showTab('flows',this)">Current Flows</button>
+      <button class="tab" onclick="showTab('economics',this)">Node Economics</button>
+      <button class="tab" onclick="showTab('optimiser',this)">Optimiser</button>
+      <button class="tab" onclick="showTab('investment',this)">Investment</button>
+    </div>
+    <section id="dashboard">
+      <div class="kpis">
+        <div class="kpi"><div class="label">Best Pathway</div><div class="value" id="bestPath">—</div><div class="sub" id="bestReason">Run optimiser</div></div>
+        <div class="kpi"><div class="label">Farmer Income</div><div class="value" id="kpiFarmer">—</div><div class="sub">Monthly across model volume</div></div>
+        <div class="kpi"><div class="label">Women SHG Gain</div><div class="value" id="kpiShg">—</div><div class="sub">Monthly net contribution</div></div>
+        <div class="kpi"><div class="label">Working Capital</div><div class="value" id="kpiWC">—</div><div class="sub">Indicative 30-day stock cycle</div></div>
+      </div>
+      <div class="notice"><strong>How to use:</strong> change node prices directly in the cards or assumption panel, click Recalculate, then choose an optimisation goal and click Optimise Path. Farmer and SHG gains are prioritised; Seba Jagat is treated as a facilitation node, not a profit centre.</div>
+      <div id="recommended" class="result-card"></div>
+      <h2>Visual Pathway Map</h2>
+      <div class="legend"><span><i class="dot f"></i>Farmer</span><span><i class="dot s"></i>Women SHG</span><span><i class="dot j"></i>Seba Jagat facilitator</span><span><i class="dot o"></i>Market actor</span></div>
+      <div id="flowCards"></div>
+    </section>
+    <section id="flows" class="hidden"><h2>Current Flows</h2><div id="flowCards2"></div></section>
+    <section id="economics" class="hidden"><h2>Node-wise Value Capture</h2><div id="nodeTable"></div></section>
+    <section id="optimiser" class="hidden"><h2>Pathway Optimiser</h2><div id="optimiserTable"></div><div id="skuTable"></div></section>
+    <section id="investment" class="hidden"><h2>Minimum Investment Planner</h2><div id="investmentTable"></div><div class="notice">Investment score is intentionally conservative. It penalises machinery, packaging, distribution complexity, unsold stock risk, and working capital burden.</div></section>
+  </main>
+</div>
+<script>
+const baseModel = {
+  assumptions:{farmerDry:120,traderDry:135,powderCost:180,processingCost:20,kgStore:10,stores:25,directShare:35,wcDays:30},
+  skus:[
+    {brand:'Seba Jagat',sku:'50 g',grams:50,retail:25,retailerBuy:23,fit:65},
+    {brand:'Seba Jagat',sku:'100 g',grams:100,retail:50,retailerBuy:46,fit:60},
+    {brand:'Seba Jagat',sku:'200 g',grams:200,retail:90,retailerBuy:84,fit:62},
+    {brand:'Seba Jagat',sku:'1 kg',grams:1000,retail:200,retailerBuy:180,fit:55},
+    {brand:'Bharat/Everest',sku:'10 g',grams:10,retail:5,retailerBuy:4,fit:95},
+    {brand:'Bharat/Everest',sku:'20 g',grams:20,retail:10,retailerBuy:8.75,fit:92},
+    {brand:'Bharat/Everest',sku:'100 g',grams:100,retail:46,retailerBuy:44,fit:85},
+    {brand:'Bharat/Everest',sku:'200 g',grams:200,retail:76,retailerBuy:74,fit:88}
+  ],
+  pathways:[
+    {id:'p1',name:'Conventional Trader Route',type:'Baseline',risk:30,investment:15,marketFit:82,nodes:[
+      {name:'Farmer',role:'Producer',kind:'farmer',buy:0,sell:120,cost:0,volume:250,product:'Dried turmeric'},
+      {name:'Sourcing Trader',role:'Aggregator',kind:'other',buy:120,sell:135,cost:5,volume:250,product:'Dried fingers'},
+      {name:'Processing Unit',role:'Processor',kind:'other',buy:135,sell:180,cost:20,volume:250,product:'Loose powder'},
+      {name:'Distributor',role:'Distributor',kind:'other',buy:180,sell:200,cost:6,volume:250,product:'Bulk/packed powder'},
+      {name:'Retailer',role:'Retail',kind:'other',buy:200,sell:240,cost:2,volume:250,product:'Retail packs'},
+      {name:'Customer',role:'End buyer',kind:'customer',buy:240,sell:0,cost:0,volume:250,product:'Turmeric powder'}]},
+    {id:'p2',name:'Seba Jagat Processing Route',type:'Facilitated',risk:42,investment:45,marketFit:72,nodes:[
+      {name:'Farmer',role:'Producer',kind:'farmer',buy:0,sell:120,cost:0,volume:250,product:'Dried turmeric'},
+      {name:'Trader / SHG Aggregator',role:'Sourcing',kind:'shg',buy:120,sell:135,cost:4,volume:250,product:'Dried fingers'},
+      {name:'Seba Jagat Processing Centre',role:'Facilitator',kind:'sj',buy:135,sell:180,cost:20,volume:250,product:'Loose powder'},
+      {name:'Distribution Channel',role:'Distributor',kind:'other',buy:180,sell:200,cost:8,volume:250,product:'Packed powder'},
+      {name:'Retailer',role:'Retail',kind:'other',buy:200,sell:240,cost:2,volume:250,product:'Retail packs'},
+      {name:'Customer',role:'End buyer',kind:'customer',buy:240,sell:0,cost:0,volume:250,product:'Turmeric powder'}]},
+    {id:'p3',name:'Women SHG Direct Route',type:'Priority',risk:48,investment:38,marketFit:78,nodes:[
+      {name:'Farmer',role:'Producer',kind:'farmer',buy:0,sell:130,cost:0,volume:250,product:'Dried turmeric'},
+      {name:'Women SHG Sourcing',role:'Aggregation',kind:'shg',buy:130,sell:140,cost:3,volume:250,product:'Dried fingers'},
+      {name:'Women SHG Processing',role:'Processing + packing',kind:'shg',buy:140,sell:200,cost:28,volume:250,product:'Packed powder'},
+      {name:'Women Network / Direct',role:'Community retail',kind:'shg',buy:200,sell:240,cost:8,volume:250,product:'Direct packs'},
+      {name:'Customer',role:'End buyer',kind:'customer',buy:240,sell:0,cost:0,volume:250,product:'Turmeric powder'}]},
+    {id:'p4',name:'SHG Retail Penetration Route',type:'Optimised option',risk:36,investment:32,marketFit:88,nodes:[
+      {name:'Farmer',role:'Producer',kind:'farmer',buy:0,sell:128,cost:0,volume:250,product:'Dried turmeric'},
+      {name:'SHG Aggregation',role:'Sourcing',kind:'shg',buy:128,sell:138,cost:3,volume:250,product:'Dried fingers'},
+      {name:'SHG/SJ Processing',role:'Processing support',kind:'shg',buy:138,sell:170,cost:18,volume:250,product:'Competitive powder'},
+      {name:'Local Retailers',role:'Retail outlets',kind:'other',buy:170,sell:200,cost:3,volume:250,product:'100g/200g packs'},
+      {name:'Customer',role:'End buyer',kind:'customer',buy:200,sell:0,cost:0,volume:250,product:'Affordable packs'}]},
+    {id:'p5',name:'Premium Wellness Route',type:'Premium option',risk:65,investment:58,marketFit:55,nodes:[
+      {name:'Farmer',role:'Producer',kind:'farmer',buy:0,sell:135,cost:0,volume:125,product:'Selected turmeric'},
+      {name:'Women SHG Processing',role:'Quality processing',kind:'shg',buy:135,sell:220,cost:38,volume:125,product:'Premium powder'},
+      {name:'Brand / Wellness Channel',role:'Premium channel',kind:'shg',buy:220,sell:500,cost:65,volume:125,product:'Wellness pack'},
+      {name:'Customer',role:'End buyer',kind:'customer',buy:500,sell:0,cost:0,volume:125,product:'Wellness product'}]}
+  ],
+  investments:[
+    ['Immediate','Process optimisation at existing unit','SOPs, drying, grinding loss control, batch costing',25000,'Low'],
+    ['Immediate','Packaging improvement','Labels, pouch sealing, weighing discipline, MRP/SKU clarity',45000,'Low'],
+    ['30–60 days','Retailer pilot','25 stores, retailer margin test, weekly replenishment route',30000,'Medium'],
+    ['30–90 days','Women sales network','SHG sellers, demos, village haat selling, direct customer database',55000,'Medium'],
+    ['90–180 days','Quality/premium line','Curcumin testing, moisture testing, wellness story, premium packaging',90000,'Medium-High'],
+    ['Later','Dedicated micro-processing cluster','Pulveriser, polisher, dryer upgrades, storage bins',250000,'High']
+  ]
+};
+let model = JSON.parse(JSON.stringify(baseModel)); let latestRank=[];
+const fmt = n=>'₹'+Math.round(n).toLocaleString('en-IN'); const perkg=(sku)=>Math.round((sku.retail*1000)/sku.grams);
+function getA(){return ['farmerDry','traderDry','powderCost','processingCost','kgStore','stores','directShare','wcDays'].reduce((o,k)=>(o[k]=+document.getElementById(k).value||0,o),{})}
+function syncAssumptions(){let a=getA();model.assumptions=a;model.pathways[0].nodes[0].sell=a.farmerDry;model.pathways[0].nodes[1].buy=a.farmerDry;model.pathways[0].nodes[1].sell=a.traderDry;model.pathways[0].nodes[2].buy=a.traderDry;model.pathways[0].nodes[2].sell=a.powderCost;model.pathways[0].nodes[2].cost=a.processingCost;model.pathways[1].nodes[0].sell=a.farmerDry;model.pathways[1].nodes[1].buy=a.farmerDry;model.pathways[1].nodes[1].sell=a.traderDry;model.pathways[1].nodes[2].buy=a.traderDry;model.pathways[1].nodes[2].sell=a.powderCost;model.pathways[1].nodes[2].cost=a.processingCost;recalc()}
+function nodeMargin(n){ if(n.kind==='customer') return 0; return (n.sell||0)-(n.buy||0)-(n.cost||0)}
+function pathStats(p){let farmer=0,shg=0,total=0,actor=0; p.nodes.forEach(n=>{let m=nodeMargin(n), earning=m*(n.volume||0); total+=Math.max(0,earning); if(n.kind==='farmer') farmer+=(n.sell||0)*(n.volume||0); if(n.kind==='shg') shg+=earning; if(n.kind!=='customer') actor+=earning}); let a=model.assumptions; let wc=(p.nodes[0].sell||0)*(p.nodes[0].volume||0)*(a.wcDays/30); return {farmer,shg,total,actor,wc,investment:p.investment,risk:p.risk,marketFit:p.marketFit,volume:p.nodes[0]?.volume||0}}
+function scorePath(p,goal='balanced'){let s=pathStats(p); let weights={balanced:[.35,.35,.12,.1,-.05,-.03],farmer:[.65,.15,.08,.05,-.04,-.03],shg:[.15,.65,.08,.05,-.04,-.03],lowinv:[.22,.22,.12,.10,-.28,-.06],market:[.2,.22,.4,.08,-.05,-.05],premium:[.2,.35,.05,.3,-.05,-.05]}[goal]; let maxF=35000,maxS=35000,maxT=65000; return Math.round(100*(weights[0]*Math.min(s.farmer/maxF,1.5)+weights[1]*Math.min(s.shg/maxS,1.5)+weights[2]*(s.marketFit/100)+weights[3]*Math.min(s.total/maxT,1.5)+weights[4]*(s.investment/100)+weights[5]*(s.risk/100)));}
+function renderFlows(target='flowCards'){document.getElementById(target).innerHTML=model.pathways.slice(0,5).map((p,pi)=>`<div class="pathway"><div class="pathway-head"><h3>${p.name}</h3><span class="badge ${p.type.includes('Priority')?'orange':p.type.includes('Facilitated')?'blue':''}">${p.type}</span></div><div class="flow">${p.nodes.map((n,ni)=>`${ni?'<div class="arrow">›</div>':''}<div class="node ${n.kind==='farmer'?'farmer':n.kind==='shg'?'shg':n.kind==='sj'?'sj':''}"><h4>${n.name}</h4><div class="role">${n.role}</div><div class="mini">${n.product}</div>${n.kind!=='customer'?`<label>Sell ₹/kg</label><input type="number" value="${n.sell}" onchange="editNode('${p.id}',${ni},'sell',this.value)"><label>Cost ₹/kg</label><input type="number" value="${n.cost}" onchange="editNode('${p.id}',${ni},'cost',this.value)"><div class="price">${fmt(nodeMargin(n))}</div><div class="mini">Net margin/kg</div>`:`<div class="price">${fmt(n.buy)}</div><div class="mini">Consumer price/kg</div>`}</div>`).join('')}</div></div>`).join('')}
+function renderTables(){let rows=[];model.pathways.forEach(p=>p.nodes.forEach(n=>{if(n.kind==='customer')return;let m=nodeMargin(n);rows.push([p.name,n.name,n.role,n.product,n.buy,n.sell,n.cost,m,n.volume,m*n.volume,n.kind])}));document.getElementById('nodeTable').innerHTML=`<table><thead><tr><th>Pathway</th><th>Node</th><th>Role</th><th>Product</th><th>Buy ₹/kg</th><th>Sell ₹/kg</th><th>Cost ₹/kg</th><th>Net/kg</th><th>Volume kg</th><th>Monthly gain</th></tr></thead><tbody>${rows.map(r=>`<tr class="${r[10]==='farmer'||r[10]==='shg'?'highlight':''}">${r.slice(0,10).map((c,i)=>`<td class="${i>=4?'num':''} ${i==7||i==9?(c>=0?'positive':'negative'):''}">${i>=4?fmt(c):c}</td>`).join('')}</tr>`).join('')}</tbody></table>`; let rank=rankPaths();document.getElementById('optimiserTable').innerHTML=`<table><thead><tr><th>Rank</th><th>Pathway</th><th>Score</th><th>Farmer income</th><th>SHG gain</th><th>Working capital</th><th>Investment score</th><th>Risk</th><th>Market fit</th></tr></thead><tbody>${rank.map((r,i)=>`<tr class="${i==0?'highlight':''}"><td>${i+1}</td><td>${r.p.name}</td><td><div class="scorebar"><span style="width:${Math.min(100,Math.max(0,r.score))}%"></span></div><strong>${r.score}</strong></td><td class="num positive">${fmt(r.stats.farmer)}</td><td class="num positive">${fmt(r.stats.shg)}</td><td class="num">${fmt(r.stats.wc)}</td><td class="num">${r.stats.investment}/100</td><td class="num">${r.stats.risk}/100</td><td class="num">${r.stats.marketFit}/100</td></tr>`).join('')}</tbody></table>`; document.getElementById('skuTable').innerHTML=`<h2 style="margin-top:22px">SKU Market Fit</h2><table><thead><tr><th>Brand</th><th>SKU</th><th>Consumer rate</th><th>Per kg equivalent</th><th>Retailer buy</th><th>Retailer margin</th><th>Market fit</th></tr></thead><tbody>${model.skus.map(s=>`<tr><td>${s.brand}</td><td>${s.sku}</td><td class="num">${fmt(s.retail)}</td><td class="num">${fmt(perkg(s))}</td><td class="num">${fmt(s.retailerBuy)}</td><td class="num">${fmt(s.retail-s.retailerBuy)}</td><td class="num">${s.fit}/100</td></tr>`).join('')}</tbody></table>`; document.getElementById('investmentTable').innerHTML=`<table><thead><tr><th>Phase</th><th>Investment item</th><th>Purpose</th><th>Estimated cost</th><th>Risk</th></tr></thead><tbody>${model.investments.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="num">${fmt(r[3])}</td><td>${r[4]}</td></tr>`).join('')}</tbody></table>`}
+function rankPaths(){let goal=document.getElementById('goal').value;latestRank=model.pathways.map(p=>({p,stats:pathStats(p),score:scorePath(p,goal)})).sort((a,b)=>b.score-a.score);return latestRank}
+function recalc(){renderFlows('flowCards');renderFlows('flowCards2');renderTables();let best=rankPaths()[0];document.getElementById('bestPath').textContent=best.p.name.replace(' Route','');document.getElementById('bestReason').textContent=`Score ${best.score}/100 for ${document.getElementById('goal').selectedOptions[0].text}`;document.getElementById('kpiFarmer').textContent=fmt(best.stats.farmer);document.getElementById('kpiShg').textContent=fmt(best.stats.shg);document.getElementById('kpiWC').textContent=fmt(best.stats.wc);document.getElementById('recommended').innerHTML=`<h3>Recommended Operating Path: ${best.p.name}</h3><p><strong>Why:</strong> this route currently gives ${fmt(best.stats.farmer)} farmer income and ${fmt(best.stats.shg)} SHG monthly gain under the selected goal. It has market-fit score ${best.stats.marketFit}/100, investment burden ${best.stats.investment}/100 and risk ${best.stats.risk}/100.</p><p><strong>Action:</strong> prioritise SHG-owned stages wherever the margin is positive: sourcing, processing/packing, and direct/community retail. Use Seba Jagat as a facilitation and quality-control backbone rather than a margin-capturing intermediary.</p>`}
+function optimise(){let goal=document.getElementById('goal').value; if(goal==='farmer'){document.getElementById('farmerDry').value=135;document.getElementById('directShare').value=45}else if(goal==='shg'){document.getElementById('directShare').value=70;document.getElementById('processingCost').value=18}else if(goal==='lowinv'){document.getElementById('directShare').value=35;document.getElementById('processingCost').value=16}else if(goal==='market'){document.getElementById('powderCost').value=170;document.getElementById('directShare').value=30}else if(goal==='premium'){document.getElementById('farmerDry').value=135;document.getElementById('directShare').value=60}syncAssumptions();document.getElementById('recommended').scrollIntoView({behavior:'smooth',block:'center'})}
+function applyPreset(p){ if(p==='market'){document.getElementById('goal').value='market';document.getElementById('farmerDry').value=128;document.getElementById('powderCost').value=170;document.getElementById('directShare').value=25}else if(p==='direct'){document.getElementById('goal').value='shg';document.getElementById('farmerDry').value=130;document.getElementById('directShare').value=70;document.getElementById('stores').value=40}else{document.getElementById('goal').value='premium';document.getElementById('farmerDry').value=135;document.getElementById('powderCost').value=220;document.getElementById('stores').value=12;document.getElementById('directShare').value=65}syncAssumptions()}
+function editNode(pid,ni,field,val){let p=model.pathways.find(x=>x.id===pid);p.nodes[ni][field]=+val||0;if(ni+1<p.nodes.length)p.nodes[ni+1].buy=p.nodes[ni].sell;recalc()}
+function showTab(id,el){document.querySelectorAll('main section').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active')}
+function resetModel(){model=JSON.parse(JSON.stringify(baseModel));Object.entries(model.assumptions).forEach(([k,v])=>{let e=document.getElementById(k);if(e)e.value=v});recalc()}
+function downloadJSON(){let blob=new Blob([JSON.stringify(model,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='turmeric_value_chain_model.json';a.click()}
+function loadJSON(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{model=JSON.parse(r.result);Object.entries(model.assumptions||{}).forEach(([k,v])=>{let el=document.getElementById(k);if(el)el.value=v});recalc()};r.readAsText(f)}
+function exportCSV(){let lines=['Pathway,Node,Role,Kind,Product,Buy,Sell,Cost,Margin,Volume,MonthlyGain'];model.pathways.forEach(p=>p.nodes.forEach(n=>{if(n.kind!=='customer')lines.push([p.name,n.name,n.role,n.kind,n.product,n.buy,n.sell,n.cost,nodeMargin(n),n.volume,nodeMargin(n)*n.volume].map(x=>'"'+String(x).replaceAll('"','""')+'"').join(','))}));let blob=new Blob([lines.join('\n')],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='turmeric_node_economics.csv';a.click()}
+recalc();
+</script>
+</body>
+</html>
